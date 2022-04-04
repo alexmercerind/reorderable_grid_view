@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:reorderable_grid_view/src/reorderable_grid_mixin.dart';
@@ -102,7 +103,7 @@ class ReorderableItemViewState extends State<ReorderableItemView> with TickerPro
 
   // Ok, for now we use multiDragRecognizer
   MultiDragGestureRecognizer _createDragRecognizer() {
-    return DelayedMultiDragGestureRecognizer(debugOwner: this);
+    return (Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? ImmediateMultiDragGestureRecognizer(debugOwner: this): DelayedMultiDragGestureRecognizer(debugOwner: this);
   }
 
   @override
